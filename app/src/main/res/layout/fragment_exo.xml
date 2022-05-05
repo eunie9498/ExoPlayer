@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvTitle, tvSinger, cardView, bottomBg,
+playerSeekBar, currentTime, wholeTime"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/playerViewGroup" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tvType, recyclerView, playListSeekBar"
+        android:layout_height="wrap_content"
+        android:id="@+id/playListViewGroup"/>
+
+    <View
+        android:id="@+id/topBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bgColor"
+        app:layout_constraintBottom_toTopOf="@id/bottomBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="3" />
+
+    <View
+        android:id="@+id/bottomBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/secondBg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBg"
+        app:layout_constraintVertical_weight="2" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="title" />
+
+    <TextView
+        android:id="@+id/tvSinger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="artist" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:translationY="60dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/topBg"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imgCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@color/grey_cc"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="재생목록" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/playListSeekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvType" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:alpha="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:use_controller="false" />
+
+    <SeekBar
+        android:id="@+id/playerSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:layout_marginBottom="40dp"
+        android:progressDrawable="@drawable/player_seek_bar"
+        android:thumb="@drawable/player_thumb"
+        app:layout_constraintBottom_toTopOf="@+id/playListSeekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:progress="40" />
+
+    <TextView
+        android:textColor="@color/purple_200"
+        android:id="@+id/currentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="0:00"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="@id/playerSeekBar"
+        app:layout_constraintTop_toBottomOf="@id/playerSeekBar" />
+
+    <TextView
+        android:id="@+id/wholeTime"
+        tools:text="0:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toEndOf="@id/playerSeekBar"
+        app:layout_constraintTop_toBottomOf="@id/playerSeekBar" />
+
+    <SeekBar
+        android:id="@+id/playListSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:clickable="false"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:progressTint="@color/grey_aa"
+        android:thumb="@null"
+        app:layout_constraintBottom_toTopOf="@+id/iconSet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:progress="40" />
+
+
+    <LinearLayout
+        android:id="@+id/iconSet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/btnList"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="-40dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_list"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/btnPlay"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_play"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/ic_next"
+            app:tint="@color/black" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
