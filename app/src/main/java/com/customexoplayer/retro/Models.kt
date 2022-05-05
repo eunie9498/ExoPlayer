@@ -15,3 +15,13 @@ data class MusicData(
     val artist: String,
     val coverUrl: String
 ) : Parcelable
+
+@Parcelize
+data class MusicList(
+    val id: Long,
+    val trackName:String,
+    val streamUrl :String,
+    val artist: String,
+    val coverUrl: String,
+    val isPlaying: Boolean?=false
+): Parcelable
