@@ -64,4 +64,9 @@ data class PlayModel(
 
         return playMusicModel[currentPosition]
     }
+
+    fun currentModel(): MusicList? {
+        if (playMusicModel.isEmpty()) return null
+        return playMusicModel[currentPosition]
+    }
 }
