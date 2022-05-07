@@ -10,17 +10,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.customexoplayer.retro.MusicData
 import com.customexoplayer.retro.MusicList
 
-class ExoAdapter : ListAdapter<MusicList, ExoAdapter.ViewHolder>(diffUtil) {
+class ExoAdapter(private val callback: (MusicList)-> Unit) : ListAdapter<MusicList, ExoAdapter.ViewHolder>(diffUtil) {
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: MusicList) {
+
             val tvTrack = view.findViewById<TextView>(R.id.tvTrack)
             val tvArtist = view.findViewById<TextView>(R.id.tvArtist)
             val imgCover = view.findViewById<ImageView>(R.id.itemCover)
+
             tvTrack.text = item.trackName
             tvArtist.text = item.artist
+
             Glide.with(imgCover).load(item.coverUrl).into(imgCover)
 
             if (item.isPlaying == true) {
@@ -28,18 +30,21 @@ class ExoAdapter : ListAdapter<MusicList, ExoAdapter.ViewHolder>(diffUtil) {
             } else {
                 itemView.setBackgroundColor(Color.TRANSPARENT)
             }
-        }
 
+            itemView.setOnClickListener{
+                callback(item)
+            }
+        }
     }
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicList>() {
             override fun areContentsTheSame(oldItem: MusicList, newItem: MusicList): Boolean {
-                return oldItem.trackName == newItem.trackName
+                return oldItem.id == newItem.id
             }
 
             override fun areItemsTheSame(oldItem: MusicList, newItem: MusicList): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
         }
     }

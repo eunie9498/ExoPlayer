@@ -7,3 +7,11 @@ fun MusicData.mapper(id: Long): MusicList =
         artist = this.artist,
         trackName = this.trackName,
         coverUrl = this.coverUrl)
+
+
+fun MusicResponse.mapper(): PlayModel =
+    PlayModel(
+        playMusicModel = this.musics!!.mapIndexed{ idx, entity ->
+            entity.mapper(idx.toLong())
+        }
+    )
